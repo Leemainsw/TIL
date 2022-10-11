@@ -61,3 +61,16 @@ getInitialProps에서 데이터를 console로 찍게 되면 처음 브라우저�
 
 ### styled-jsx로 스타일링하기
 styled jsx는 CSS in js 라이브러리로 css를 캡슐화하고 범위가 지정되게 만들어 구성 요소를 스타일링 할 수 있다. 넥스트에서 기본으로 제공하기에 별도의 모듈 설치가 필요하지 않다.
+
+
+### 공통 페이지 만들기 
+
+1. _app 파일
+- app 컴포넌트는 모든 페이지의 공통 페이지 역할을 한다.
+- 페이지들의 공통된 레이아웃
+- 페이지를 탐색할 때 상태 유지
+- 추가 데이터를 페이지에 주입
+- 글로벌 css 추가
+등의 역할을 할 수 있다. 
+
+코드를 보면 Component라는 props를 받게 되는데, Component는 불러오는 페이지이다. 또한, Componet는 pageProps를 props로 받고 있는데 이는 pages 안의 파일에서 getServerSideProps, getStaticProps 혹은 getInitialProps로 페이지에 전달해주는 props이다.
