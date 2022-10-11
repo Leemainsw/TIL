@@ -75,8 +75,12 @@ styled jsx는 CSS in js 라이브러리로 css를 캡슐화하고 범위가 지�
 
 코드를 보면 Component라는 props를 받게 되는데, Component는 불러오는 페이지이다. 또한, Componet는 pageProps를 props로 받고 있는데 이는 pages 안의 파일에서 getServerSideProps, getStaticProps 혹은 getInitialProps로 페이지에 전달해주는 props이다.
 
-2. 공통 문서 (_document) 만들기
+2. 공통 문서(_document) 만들기
 - 사용자 정의 Document는 일반적으로 응용 프로그램 html 및 body 태그를 보강하는데 사용된다.
 - 이를 이용하여 title, description, meta등 프로젝트의 정보를 제공하는 HTMl 코드를 작성할 수 있다
 - 폰트나 외부 api, dn 등을 불러올 수 있다.
 - css in js의 서버 사이드 렌더링을 위한 설정을 할 수 있다.
+
+3. 에러 페이지(_error) 만들기
+- 넥스트에서는 기본적인 에러 페이지를 제공해준다
+- 커스텀이 가능하다.
