@@ -32,4 +32,4 @@ export async function getStaticPaths(){
     }
 }
 
-export default name;
+export default name

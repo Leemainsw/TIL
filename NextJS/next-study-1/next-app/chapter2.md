@@ -58,3 +58,6 @@ getServerSideProps와는 다르게 query대신 params를 사용한다. 그리고
 
 #### getInitialProps
 getInitialProps에서 데이터를 console로 찍게 되면 처음 브라우저로 이동할 때에는 브라우저 콘솔에서 데이터가 출력되고 새로고침을 하게 되면 터미널에서 데이터가 출력된다. 이는 getInitialProps를 사용하게 되면 초기 렌더링 시에 서버에서 데이터를 불러오지만, 클라이언트 측 내비게이션을 사용하게 되면 클라이언트 측에서 데이터를 불러오는 것을 의미한다.
+
+### styled-jsx로 스타일링하기
+styled jsx는 CSS in js 라이브러리로 css를 캡슐화하고 범위가 지정되게 만들어 구성 요소를 스타일링 할 수 있다. 넥스트에서 기본으로 제공하기에 별도의 모듈 설치가 필요하지 않다.
