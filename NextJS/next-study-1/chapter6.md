@@ -37,3 +37,34 @@ const axios = Axios.create({
 
 현재 이 프로젝트에서는 "http://localhost:3000"이라는 주소로 직접 설정하였지만 api를 보낼 서버가 다른 서버로 바뀔 수도 있기 때문에 변경이 쉽도록 해야 한다.  
 클라이언트에서 .env.local에 적어둔 환경변수를 콘솔로 찍으면 데이터가 브라우저에서 노출되지 않는다. (서버에서만 노출된다) 그렇기 때문에 변수병에 접두어로 ```NEXT_PUBLIC_```을 붙여주어야 한다.
+
+
+### 투두 체크하기
+```Array.prototype.some``` 함수는 일치하는 id가 있다면 true를 리턴하고, id가 없다면 false를 리턴한다.
+
+**view에 변화를 주는 방법에 대한 코드**  
+```javascript
+ const checkTodo = async (id: number) => {
+        try{
+            await checkTodoAPI(id);
+            console.log('체크하였습니다');
+
+            // view에 변화를 주는 방법 1 (데이터 다시 받기)
+            Router.reload();
+
+            // view에 변화를 주는 방법 2 (데이터 다시 받기)
+            Router.push('/');
+
+            // view에 변화를 주는 방법 3 (data를 local로 지정하여 사용하기)
+            const newTodos = localTodos.map((todo)=> {
+                if(todo.id === id){
+                    return {...todo, checked: !todo.checked}
+                };
+                return todo;
+            });
+            setLocalTodos(newTodos);
+        }catch(e){
+            console.log(e);
+        }
+    }
+```
