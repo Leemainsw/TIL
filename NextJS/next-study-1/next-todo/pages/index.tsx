@@ -1,19 +1,21 @@
-import { NextPage } from 'next';
-import styled from 'styled-components';
+import { GetServerSideProps, NextPage } from 'next';
 import TodoList from '../components/TodoList';
 import { TodoType } from '../types/todo';
-
-const todos: TodoType[] = [
-    {id: 1, text: '할 일 목록 1', color: 'red', checked: false},
-    {id: 2, text: '할 일 목록 2', color: 'orange', checked: false},
-    {id: 3, text: '할 일 목록 3', color: 'yellow', checked: true},
-    {id: 4, text: '할 일 목록 4', color: 'green', checked: true},
-    {id: 5, text: '할 일 목록 5', color: 'blue', checked: false},
-    {id: 6, text: '할 일 목록 6', color: 'navy', checked: false},
-]
+import Axios from 'axios';
 
 const app: NextPage = () => {
-    return <TodoList todos={todos} />;
+    return <TodoList todos={[]} />;
+}
+
+export const getServerSideProps: GetServerSideProps = async() => {
+    try{
+        const { data } = await Axios.get<TodoType[]>('http://localhost:3000/api/todos');
+        console.log(data);
+        return { props: {}}
+    }catch(e){
+        console.log(e);
+        return { props: {} };
+    }
 }
 
 export default app;
