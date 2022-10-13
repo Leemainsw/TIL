@@ -1,7 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import TodoList from '../components/TodoList';
-import { TodoType } from '../types/todo';
-import Axios from 'axios';
+import { getTodosAPI } from '../lib/api/todo';
 
 const app: NextPage = () => {
     return <TodoList todos={[]} />;
@@ -9,7 +8,7 @@ const app: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async() => {
     try{
-        const { data } = await Axios.get<TodoType[]>('http://localhost:3000/api/todos');
+        const { data } = await getTodosAPI();
         console.log(data);
         return { props: {}}
     }catch(e){

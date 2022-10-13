@@ -22,3 +22,12 @@ api를 만들면서 다음의 과정을 수행하게 된다.
 3. 파일의 데이터를 객체로 결과 값으로 보내준다.
 
 파일의 데이터 불러오는 GET 행위이기 때문에 req.method가 GET인지 확인해야 함.
+
+### axios 설정하기
+Axios를 사용할 때 마다 매번 같은 호스트 주소를 적어 사용하는 것은 번거로운 일이다. 따라서 axios의 기본경로를 설정하여 이를 방지해보겠다.
+```lib/api/index.ts``` 파일을 만들어 아래의 코드처럼 Axios에 BaseURL을 설정한다.
+```javascript
+const axios = Axios.create({
+    baseURL: "http://localhost:3000"
+})
+```
