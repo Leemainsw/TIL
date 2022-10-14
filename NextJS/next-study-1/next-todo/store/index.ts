@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { combineReducers } from "redux";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import todo from './todo';
 import { configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
 
 // 리듀서들을 모듈별로 관리하여 combineReducers를 사용하여 하나로 모아서 사용한다.
 const rootReducer = combineReducers({
@@ -21,7 +22,15 @@ const reducer = (state, action) => {
     return rootReducer(state, action);
 };
 
-export type RooteState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
+
+// 타입 지원되는 커스텀 useSelector 만들기 1
+export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+
+// // 타입 지원되는 커스텀 useSelector 만들기 2
+// declare module 'react-redux' {
+//     interface DefaultRootState extends RootState {}
+// }
 
 const initStore = () => {
     return configureStore({

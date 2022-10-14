@@ -5,8 +5,7 @@ import { TodoType } from '../types/todo';
 import TrashCanIcon from '../public/static/svg/trash_can.svg';
 import CheckMarkIcon from '../public/static/svg/check_mark.svg';
 import { checkTodoAPI, deleteTodoAPI } from '../lib/api/todo';
-import Router from 'next/router';
-
+import { useSelector } from '../store';
 interface IProps {
     todos: TodoType[];
 }
@@ -128,7 +127,8 @@ const Container = styled.div`
     }
 `
 
-const TodoList: React.FC<IProps> = ( {todos} ) => {
+const TodoList: React.FC<IProps> = ( ) => {
+    const todos = useSelector((state)=> state.todo.todos);
     const [localTodos, setLocalTodos] = useState(todos);
 
     const getTodoColorNums = useCallback(() => {
