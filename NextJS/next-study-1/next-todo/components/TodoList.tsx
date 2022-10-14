@@ -5,8 +5,9 @@ import { TodoType } from '../types/todo';
 import TrashCanIcon from '../public/static/svg/trash_can.svg';
 import CheckMarkIcon from '../public/static/svg/check_mark.svg';
 import { checkTodoAPI, deleteTodoAPI } from '../lib/api/todo';
-import Router from 'next/router';
-
+import { useSelector } from '../store';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '../store/todo';
 interface IProps {
     todos: TodoType[];
 }
@@ -128,8 +129,9 @@ const Container = styled.div`
     }
 `
 
-const TodoList: React.FC<IProps> = ( {todos} ) => {
-    const [localTodos, setLocalTodos] = useState(todos);
+const TodoList: React.FC<IProps> = ( ) => {
+    const todos = useSelector((state)=> state.todo.todos);
+    const dispatch = useDispatch();
 
     const getTodoColorNums = useCallback(() => {
         let red = 0;
@@ -188,7 +190,6 @@ const TodoList: React.FC<IProps> = ( {todos} ) => {
     const checkTodo = async (id: number) => {
         try{
             await checkTodoAPI(id);
-            console.log('체크하였습니다');
 
             // view에 변화를 주는 방법 1 (데이터 다시 받기)
             // Router.reload();
@@ -197,13 +198,14 @@ const TodoList: React.FC<IProps> = ( {todos} ) => {
             // Router.push('/');
 
             // view에 변화를 주는 방법 3 (data를 local로 지정하여 사용하기)
-            const newTodos = localTodos.map((todo)=> {
+            const newTodos = todos.map((todo)=> {
                 if(todo.id === id){
                     return {...todo, checked: !todo.checked}
                 };
                 return todo;
             });
-            setLocalTodos(newTodos);
+            dispatch(todoActions.setTodo(newTodos));
+            console.log('체크하였습니다');
         }catch(e){
             console.log(e);
         }
@@ -212,8 +214,8 @@ const TodoList: React.FC<IProps> = ( {todos} ) => {
     const deleteTodo = async (id: number) => {
         try {
             await deleteTodoAPI(id);
-            const newTodos = localTodos.filter((todo) => todo.id !== id);
-            setLocalTodos(newTodos);
+            const newTodos = todos.filter((todo) => todo.id !== id);
+            dispatch(todoActions.setTodo(newTodos));
             console.log('삭제했습니다.')
         } catch (e) {
             console.log(e);
@@ -224,7 +226,7 @@ const TodoList: React.FC<IProps> = ( {todos} ) => {
         <Container>
             <div className='todo-list-header'>
                 <p className='todo-list-last-todo'>
-                    남은 TODO<span>{localTodos.length}개</span>
+                    남은 TODO<span>{todos.length}개</span>
                 </p>
                 <div className="todo-list-header-colors">
                     {
@@ -239,7 +241,7 @@ const TodoList: React.FC<IProps> = ( {todos} ) => {
             </div>
 
             <ul className='todo-list'>
-                {localTodos.map((todo) => (
+                {todos.map((todo) => (
                     <li className='todo-item' key={todo.id}>
                         <div className="todo-left-side">
                             <div className={`todo-color-block bg-${todo.color}`}/>
