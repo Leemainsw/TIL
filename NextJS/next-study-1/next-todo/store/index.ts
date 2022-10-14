@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import todo from './todo';
 
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 
 // HYDRATE는 서버에서 생성된 리덕스 스토어를 클라이언트에서 사용할 수 있도록 전달해주는 역할을 한다.
 const reducer = (state, action) => {
-    if(action.type == HYDRATE) {
+    if(action.type === HYDRATE) {
         const nextState = {
             ...state,
             ...action.payload,

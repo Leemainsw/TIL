@@ -1,6 +1,8 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import TodoList from '../components/TodoList';
 import { getTodosAPI } from '../lib/api/todo';
+import { wrapper } from '../store';
+import { todoActions } from '../store/todo';
 import { TodoType } from '../types/todo';
 
 interface IProps {
@@ -11,14 +13,18 @@ const app: NextPage<IProps> = ({todos}) => {
     return <TodoList todos={todos} />;
 }
 
-export const getServerSideProps: GetServerSideProps = async() => {
-    try{
-        const { data } = await getTodosAPI();
-        return { props: { todos: data }}
-    }catch(e){
-        console.log(e);
-        return { props: {} };
+export const getServerSideProps = wrapper.getServerSideProps(
+    async ({ store }) => {
+        console.log(store);
+        try{
+            const { data } = await getTodosAPI();
+            store.dispatch(todoActions.setTodo(data));
+            return { props: { todos: data }}
+        }catch(e){
+            console.log(e);
+            return { props: {} };
+        }
     }
-}
+); 
 
 export default app;
