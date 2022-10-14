@@ -107,3 +107,16 @@ const initStore = () => {
 // App 컴포넌트에서 wrapper로 사용하기 위해 'next-redux-wrapper'에서 createWrapper를 import하여 wrapper를 만들었다.
 export const wrapper = createWrapper(initStore);
 ```
+
+### 리덕스 툴킷(Redux Toolkit)
+> Redux Toolkit은 Redux 로직을 작성하기 위해 공식적으로 추진하는 방법이다. RTK는 Redux 앱을 만들기에 필수적이라 생각한 패키지와 함수들을 포함하고 있다. 대부분의 Redux 작업을 단순화하고, 흔한 실수를 방지하며, Redux 앱을 만들기 쉽게 해주는 모범 사례를 통해 만들어졌다.  
+
+**리덕스에 대한 세가지 일방적인 문제**  
+1. 리덕스 저장소 구성이 매우 복잡하다.
+2. 리덕스가 유용한 작업을 수행할 수 있도록 많은 패키지를 추가해야 한다.
+3. 리덕스에는 상용구 코드가 너무 많이 필요하다.   
+
+리덕스 툴킷을 사용하여 리덕스를 더욱 쉽게 작성할 수 있고 더 나은 리덕스 코드를 작성할 수 있다.
+```
+yarn add @reduxjs/toolkit
+```
