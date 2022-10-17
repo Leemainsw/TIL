@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import palette from '../../styles/palette';
+import React from "react";
+import styled from "styled-components";
+import palette from "../../styles/palette";
 
 const Container = styled.div<{iconExist: boolean}>`
   input {
@@ -30,8 +30,9 @@ const Container = styled.div<{iconExist: boolean}>`
 `;
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  // eslint-disable-next-line react/require-default-props, no-undef
   icon?: JSX.Element;
-};
+}
 
 const Input: React.FC<IProps> = ({ icon, ...props }) => {
     return (
@@ -43,4 +44,3 @@ const Input: React.FC<IProps> = ({ icon, ...props }) => {
 };
 
 export default Input;
-
