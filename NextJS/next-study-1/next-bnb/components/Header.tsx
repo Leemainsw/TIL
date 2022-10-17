@@ -1,9 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
 import AirbnbLogoTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from "../styles/palette";
+// import ModalPortal from "./ModalPotal";
+import useModal from "../hooks/useModal";
+import SignUpModal from "./SignUpModal";
 
 const Container = styled.div`
   position: sticky;
@@ -53,10 +56,35 @@ const Container = styled.div`
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
         }
     }
+    .modal-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        .modal-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 10;
+        }
+        .modal-contents {
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            z-index: 11;
+        }
+      }
   }
 `;
 
 const Header: React.FC = () => {
+  // const [modalOpened, setModalOpened] = useState(false);
+  const { openModal, ModalPortal } = useModal();
   return (
     <Container>
       <Link href="/">
@@ -66,12 +94,37 @@ const Header: React.FC = () => {
         </a>
       </Link>
       <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button">
+        <button type="button" className="header-sign-up-button" onClick={openModal}>
           회원가입
         </button>
         <button type="button" className="header-login-button">
           로그인
         </button>
+        {/* 모달 생성 방법 1 */}
+        {/* {
+            modalOpened && (
+              <div className="modal-wrapper">
+                <div
+                  className="modal-background"
+                  role="presentation"
+                  onClick={() => setModalOpened(false)}
+                />
+                <div className="modal-contents" />
+              </div>
+            )
+        } */}
+        {/* 모달 생성 방법 2 */}
+        {/* {
+          modalOpened && (
+            <ModalPortal closePortal={() => setModalOpened(false)}>
+              <SignUpModal />
+            </ModalPortal>
+          )
+        } */}
+        {/* 모달 생성 방법 3 - use hooks */}
+        <ModalPortal>
+          <SignUpModal />
+        </ModalPortal>
       </div>
     </Container>
   );
