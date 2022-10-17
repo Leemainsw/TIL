@@ -1,12 +1,12 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
 import AirbnbLogoTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from "../styles/palette";
 // import ModalPortal from "./ModalPotal";
 import useModal from "../hooks/useModal";
-import SignUpModal from "./SignUpModal";
+import SignUpModal from "./auth/SignUpModal";
 
 const Container = styled.div`
   position: sticky;
