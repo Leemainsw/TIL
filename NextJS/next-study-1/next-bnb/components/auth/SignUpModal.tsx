@@ -9,6 +9,7 @@ import Input from "../common/input";
 import { dayList, monthList, yearList } from "../../lib/staticData";
 import palette from "../../styles/palette";
 import Selector from "../common/Selector";
+import Button from "../common/Button";
 
 const Container = styled.div`
   width: 568px;
@@ -46,12 +47,12 @@ const Container = styled.div`
     color: ${palette.charcoal};
   }
 
-  .sign-up-modal-birthday-selectors{
+  .sign-up-modal-birthday-selectors {
     display: flex;
     margin-bottom: 24px;
     .sign-up-modal-birthday-month-selector {
       margin-right: 16px;
-      flex-grow: 1px;
+      flex-grow: 1;
     }
     .sign-up-modal-birthday-day-selector {
       margin-right: 16px;
@@ -61,6 +62,12 @@ const Container = styled.div`
       width: 33.3333%;
     }
   }
+
+  .sign-up-modal-submit-button-wrapper{
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid ${palette.gray_eb};
+  }
 `;
 
 const SignUpModal: React.FC = () => {
@@ -69,6 +76,7 @@ const SignUpModal: React.FC = () => {
   const [firstname, setFirstname] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+
   const [birthYear, setBirthYear] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
   const [birthDay, setBirthDay] = useState<string | undefined>();
@@ -166,6 +174,9 @@ const SignUpModal: React.FC = () => {
             onChange={onChangeBirthYear}
           />
         </div>
+      </div>
+      <div className="sign-up-modal-submit-button-wrapper">
+        <Button type="submit">가입하기</Button>
       </div>
     </Container>
   );
