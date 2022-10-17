@@ -60,3 +60,11 @@ jwt를 사용하여 서버와 클라이언트간 통신할 수 있는 사용자 
       );
 ```
 access_toekn이라는 쿠키명에 토큰을 저장하며 path는 "/", expires로 지금 시간에 3일을 더해 만료일을 정하고, httponly를 사용하여 api 통신에서만 쿠키 값을 불러올 수 있고 http 이외의 접근은 불가능하도록 한 코드이다.  
+
+### 유저 정보 저장하기
+**delete를 사용하여 객체의 속성 제거하기**  
+delete를 사용하여 객체의 속성을 제거하게 되면 ```해당 객체의 제거될 속성은 optional이어야 한다```는 타입에러가 발생한다.
+```javascript
+Partial<Pick<StoredUserType, "password">>
+```
+다음 코드는 TS의 유틸리티 중 하나로, StoredUserType의 password 속성을 partial로 만든 타입을 만들게 된다. 이를 이용하여 타입에러 없이 delete를 사용할 수 있다.
