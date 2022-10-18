@@ -83,3 +83,13 @@ Partial<Pick<StoredUserType, "password">>
 쿠키에 access_token이 있다는 것은 유저가 로그인되어 있음을 의미한다.
 모든 페이지에서 유저가 페이지에 접속하였을 때 access_token이 있다면 유저의 정보를 불러와 리덕스 스토어에 저장하여 로그인된 상태로 만들어야 한다. 그러기 위해서 App 컴포넌트에서 쿠키의 access_token을 서버로 보내 유저의 정보를 받아오도록 해야 한다.
 
+플로우  
+1. _app.tsx 파일에서 cookie에 access_token이 있는지 확인한다.
+2. 있다면 access_token의 유저 정보를 받아오는 API를 호출한다.
+3. Redux에 유저 정보를 업데이트 한 뒤, isLogged를 true로 바꾸어준다.
+
+### 로그아웃하기
+1. 쿠키의 access_token 제거
+2. 리덕스 스토어의 유저 정보 제거
+3. isLogged를 false로 변경
+
