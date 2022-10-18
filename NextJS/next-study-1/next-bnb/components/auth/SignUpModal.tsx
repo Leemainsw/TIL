@@ -100,6 +100,10 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
   const [passwordFocused, setPasswordFocused] = useState(false);
 
+  const disabledMonths = ["월"];
+  const disabledDays = ["일"];
+  const disabledYears = ["년"];
+
   const dispatch = useDispatch();
   const { setValidateMode } = useValidateMode();
 
@@ -221,7 +225,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
   return (
     <Container onSubmit={onSubmitSignUp}>
-      <CloseXIcon className="modal-close-x-icon" />
+      <CloseXIcon className="modal-close-x-icon" onClick={closeModal} />
       <div className="input-wrapper">
         <Input placeholder="이메일 주소" type="email" name="email" value={email} icon={<MailIcon />} onChange={onChangeEmail} useValidation isValid={!!email} errorMessage="이메일이 필요합니다." />
       </div>
@@ -281,7 +285,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-month-selector">
           <Selector
             options={monthList}
-            disabledOptions={["월"]}
+            disabledOptions={disabledMonths}
             defaultValue="월"
             value={birthMonth}
             onChange={onChangeBirthMonth}
@@ -291,7 +295,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-day-selector">
           <Selector
             options={dayList}
-            disabledOptions={["일"]}
+            disabledOptions={disabledDays}
             defaultValue="일"
             value={birthDay}
             onChange={onChangeBirthDay}
@@ -301,7 +305,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-year-selector">
           <Selector
             options={yearList}
-            disabledOptions={["년"]}
+            disabledOptions={disabledYears}
             defaultValue="년"
             value={birthYear}
             onChange={onChangeBirthYear}
