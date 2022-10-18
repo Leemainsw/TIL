@@ -3,10 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
+import HambugerIcon from "../public/static/svg/header/hamburger.svg";
 import palette from "../styles/palette";
 // import ModalPortal from "./ModalPotal";
 import useModal from "../hooks/useModal";
 import SignUpModal from "./auth/SignUpModal";
+import { useSelector } from "../store";
 
 const Container = styled.div`
   position: sticky;
@@ -80,11 +82,33 @@ const Container = styled.div`
         }
       }
   }
+  .header-user-profile {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 6px 0 16px;
+    border: 0;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
+    border-radius: 21px;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    .header-user-profile-image {
+      margin-left: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+  }
 `;
 
 const Header: React.FC = () => {
   // const [modalOpened, setModalOpened] = useState(false);
   const { openModal, ModalPortal, closeModal } = useModal();
+  const user = useSelector((state) => state.user);
   return (
     <Container>
       <Link href="/">
@@ -93,15 +117,15 @@ const Header: React.FC = () => {
           <AirbnbLogoTextIcon />
         </a>
       </Link>
-      <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button" onClick={openModal}>
+      {/* <div className="header-auth-buttons"> */}
+      {/* <button type="button" className="header-sign-up-button" onClick={openModal}>
           회원가입
         </button>
         <button type="button" className="header-login-button">
           로그인
-        </button>
-        {/* 모달 생성 방법 1 */}
-        {/* {
+        </button> */}
+      {/* 모달 생성 방법 1 */}
+      {/* {
             modalOpened && (
               <div className="modal-wrapper">
                 <div
@@ -113,19 +137,43 @@ const Header: React.FC = () => {
               </div>
             )
         } */}
-        {/* 모달 생성 방법 2 */}
-        {/* {
+      {/* 모달 생성 방법 2 */}
+      {/* {
           modalOpened && (
             <ModalPortal closePortal={() => setModalOpened(false)}>
               <SignUpModal />
             </ModalPortal>
           )
         } */}
-        {/* 모달 생성 방법 3 - use hooks */}
-        <ModalPortal>
-          <SignUpModal closeModal={closeModal} />
-        </ModalPortal>
-      </div>
+      {/* 모달 생성 방법 3 - use hooks */}
+      {/* </div> */}
+      {
+        !user.isLogged && (
+          <div className="header-auth-buttons">
+            <button type="button" className="header-sign-up-button" onClick={openModal}>
+              회원가입
+            </button>
+            <button type="button" className="header-login-button">
+              로그인
+            </button>
+          </div>
+        )
+      }
+      {
+        user.isLogged && (
+          <button className="header-user-profile" type="button">
+            <HambugerIcon />
+            <img
+              src={user.profileImage}
+              className="header-user-profile-image"
+              alt="프로필 사진"
+            />
+          </button>
+        )
+      }
+      <ModalPortal>
+        <SignUpModal closeModal={closeModal} />
+      </ModalPortal>
     </Container>
   );
 };
