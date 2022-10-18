@@ -3,10 +3,12 @@ import { TypedUseSelectorHook, useSelector as useReduxSelector, } from "react-re
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import user from "./user";
 import common from "./common";
+import auth from "./auth";
 
 const rootReducer = combineReducers({
     user: user.reducer,
-    common: common.reducer
+    common: common.reducer,
+    auth: auth.reducer,
 });
 
 //* 스토어의 타입
