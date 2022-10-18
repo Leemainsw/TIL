@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
@@ -21,9 +21,9 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    children: React.ReactNode;
-    closePortal: () => void;
-};
+  children: React.ReactNode;
+  closePortal: () => void;
+}
 
 const ModalPortal: React.FC<IProps> = ({ children, closePortal }) => {
   const ref = useRef<Element | null>();
@@ -32,7 +32,7 @@ const ModalPortal: React.FC<IProps> = ({ children, closePortal }) => {
   useEffect(() => {
     setMounted(true);
     if (document) {
-        const dom = document.querySelector('#root-modal');
+        const dom = document.querySelector("#root-modal");
         ref.current = dom;
     }
   }, []);
@@ -40,7 +40,7 @@ const ModalPortal: React.FC<IProps> = ({ children, closePortal }) => {
   if (ref.current && mounted) {
     return createPortal(
       <Container>
-        <div className="modal-background" role="presentation" onClick={closePortal}/>
+        <div className="modal-background" role="presentation" onClick={closePortal} />
         {children}
       </Container>,
       ref.current
