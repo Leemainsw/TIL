@@ -68,3 +68,18 @@ delete를 사용하여 객체의 속성을 제거하게 되면 ```해당 객체�
 Partial<Pick<StoredUserType, "password">>
 ```
 다음 코드는 TS의 유틸리티 중 하나로, StoredUserType의 password 속성을 partial로 만든 타입을 만들게 된다. 이를 이용하여 타입에러 없이 delete를 사용할 수 있다.
+
+### 로그인 api
+로그인 Api는 다음의 순서를 거쳐 유저를 만들게 된다.
+```md
+1. api method가 POST인지 확인
+2. re.body에 필요한 값이 전부 들었는지 확인
+3. password 확인
+4. 추가된 유저의 정보와 token을 전달
+```
+
+### 로그인 유지하기
+
+쿠키에 access_token이 있다는 것은 유저가 로그인되어 있음을 의미한다.
+모든 페이지에서 유저가 페이지에 접속하였을 때 access_token이 있다면 유저의 정보를 불러와 리덕스 스토어에 저장하여 로그인된 상태로 만들어야 한다. 그러기 위해서 App 컴포넌트에서 쿠키의 access_token을 서버로 보내 유저의 정보를 받아오도록 해야 한다.
+
