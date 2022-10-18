@@ -84,7 +84,7 @@ const Container = styled.div`
 
 const Header: React.FC = () => {
   // const [modalOpened, setModalOpened] = useState(false);
-  const { openModal, ModalPortal } = useModal();
+  const { openModal, ModalPortal, closeModal } = useModal();
   return (
     <Container>
       <Link href="/">
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
         } */}
         {/* 모달 생성 방법 3 - use hooks */}
         <ModalPortal>
-          <SignUpModal />
+          <SignUpModal closeModal={closeModal} />
         </ModalPortal>
       </div>
     </Container>
