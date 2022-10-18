@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useSelector } from "../../store";
 import palette from "../../styles/palette";
 
 type InputContainerProps = {
@@ -69,29 +70,26 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   // eslint-disable-next-line react/require-default-props
   isValid?: boolean;
   // eslint-disable-next-line react/require-default-props
-  validateMode?: boolean;
-  // eslint-disable-next-line react/require-default-props
   useValidation?: boolean;
   // eslint-disable-next-line react/require-default-props
   errorMessage?: string;
 }
 
 const Input: React.FC<IProps> = ({
-  icon, validateMode,
+  icon,
   isValid = false,
   useValidation = true,
   errorMessage,
   ...props
 }) => {
+  const validateMode = useSelector((state) => state.common.validateMode);
     return (
       <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
         <input {...props} />
         {icon}
-        {
-          useValidation && validateMode && isValid && errorMessage && (
-            <p className="input-error-message">{errorMessage}</p>
-          )
-        }
+        {useValidation && validateMode && !isValid && errorMessage && (
+        <p className="input-error-message">{errorMessage}</p>
+        )}
       </Container>
     );
 };
