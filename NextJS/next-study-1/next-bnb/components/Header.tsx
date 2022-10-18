@@ -1,15 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import HambugerIcon from "../public/static/svg/header/hamburger.svg";
 import palette from "../styles/palette";
-// import ModalPortal from "./ModalPotal";
 import useModal from "../hooks/useModal";
-import SignUpModal from "./auth/SignUpModal";
 import { useSelector } from "../store";
-import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
 import AuthModal from "./auth/AuthModal";
 

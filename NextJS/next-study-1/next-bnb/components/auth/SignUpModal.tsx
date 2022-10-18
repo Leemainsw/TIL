@@ -9,11 +9,11 @@ import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 import { dayList, monthList, yearList } from "../../lib/staticData";
 import palette from "../../styles/palette";
 import Selector from "../common/Selector";
+import Input from "../common/input";
 import Button from "../common/Button";
 import { signupAPI } from "../../lib/api/auth";
 import { userActions } from "../../store/user";
 import useValidateMode from "../../hooks/useValidateMode";
-import Input from "../common/input";
 import PasswordWarning from "./PasswordWarning";
 import { authActions } from "../../store/auth";
 
