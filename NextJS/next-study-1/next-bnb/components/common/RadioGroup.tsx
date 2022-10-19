@@ -14,10 +14,10 @@ const Container = styled.div<{ isValid: boolean; validateMode: boolean }>`
     margin-bottom: 32px;
   }
   .radio-list-wrapper {
-    $:after {
-        displat: block;
-        content: "";
-        clear: both;
+    &:after {
+      display: block;
+      content: "";
+      clear: both;
     }
   }
   label {
@@ -29,7 +29,7 @@ const Container = styled.div<{ isValid: boolean; validateMode: boolean }>`
     clear: both;
 
     &:last-child {
-        margin-bottom: 0;
+      margin-bottom: 0;
     }
   }
 
