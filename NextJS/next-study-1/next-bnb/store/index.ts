@@ -4,11 +4,13 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import user from "./user";
 import common from "./common";
 import auth from "./auth";
+import registerRoom from "./registerRoom";
 
 const rootReducer = combineReducers({
     user: user.reducer,
     common: common.reducer,
     auth: auth.reducer,
+    registerRoom: registerRoom.reducer,
 });
 
 //* 스토어의 타입

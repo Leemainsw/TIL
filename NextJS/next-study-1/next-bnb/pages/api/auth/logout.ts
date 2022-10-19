@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    console.log("여기도 안오나")
   try {
     if (req.method === "DELETE") {
       res.setHeader(
