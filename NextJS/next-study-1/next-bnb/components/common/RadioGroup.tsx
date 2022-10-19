@@ -105,7 +105,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   value?: any;
   onChange?: (value: any) => void;
-  options?: { label: string; value: any; description: string } [];
+  options?: { label: string; value: any; description?: string } [];
   isValid?: boolean;
   errorMessage?: string;
 }
