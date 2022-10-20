@@ -48,6 +48,10 @@ const registerRoom = createSlice({
       state.isSetYpForGuest = action.payload;
       return state;
     },
+    setMaximumGuestCount(state, action: PayloadAction<number>) {
+      state.maximumGuestCount = action.payload;
+      return state;
+    }
   },
 });
 
