@@ -102,6 +102,7 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   colorReverse?: boolean;
   // eslint-disable-next-line no-undef
   icon?: JSX.Element;
+  styleType?: string;
 }
 
 const Button: React.FC<IProps> = ({ children, color, width, colorReverse = false, icon, ...props }) => {
