@@ -11,6 +11,8 @@ import { countryList } from "../../../lib/staticData";
 import Input from "../../common/input";
 import { useSelector } from "../../../store";
 import { registerRoomActions } from "../../../store/registerRoom";
+import { getLocationInfoAPI } from "../../../lib/api/map";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
 padding: 62px 30px 100px;
@@ -106,15 +108,30 @@ const RegisterLocation: React.FC = () => {
     dispatch(registerRoomActions.setPostcode(e.target.value));
   };
 
-  const onSuccessGetLocation = ({ coords }: { coords: {latitude: number, longitude: number} }) => {
-    console.log("latitude", coords.latitude);
-    console.log("longitude", coords.longitude);
+  const onSuccessGetLocation = async ({ coords }: { coords:
+    {latitude: number, longitude: number} }) => {
+    try {
+      const { data: currentLocation } = await getLocationInfoAPI({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      });
+      dispatch(registerRoomActions.setCountry(currentLocation.country));
+      dispatch(registerRoomActions.setCity(currentLocation.city));
+      dispatch(registerRoomActions.setDistrict(currentLocation.district));
+      dispatch(registerRoomActions.setStreetAddress(currentLocation.streetAddress));
+      dispatch(registerRoomActions.setPostcode(currentLocation.postcode));
+      dispatch(registerRoomActions.setLatitude(currentLocation.latitude));
+      dispatch(registerRoomActions.setLongitude(currentLocation.longitude));
+    } catch (e: any) {
+      console.log(e);
+    }
+    setLoading(false);
   };
 
   const onClickGetCurrentLocation = () => {
+    setLoading(true);
     navigator.geolocation.getCurrentPosition(onSuccessGetLocation, (e) => {
       console.log(e);
-      alert(e?.message);
     });
   };
 
@@ -126,7 +143,9 @@ const RegisterLocation: React.FC = () => {
         정확한 숙소 주소는 게스트가 예약을 완료한 후에만 공개됩니다.
       </p>
       <div className="register-room-location-button-wrapper">
-        <Button color="dark_cyan" colorReverse icon={<NavigationIcon />} onClick={onClickGetCurrentLocation}>현재 위치 사용</Button>
+        <Button color="dark_cyan" colorReverse icon={<NavigationIcon />} onClick={onClickGetCurrentLocation}>
+          {loading ? "불러오는 중..." : "현재 위치 사용"}
+        </Button>
       </div>
       <div className="register-room-location-country-selector-wrapper">
         <Selector
@@ -161,6 +180,10 @@ const RegisterLocation: React.FC = () => {
       <div className="register-room-location-postcode">
         <Input label="우편번호" value={postcode} onChange={onChangePostcode} />
       </div>
+      <RegisterRoomFooter
+        prevHref="/room/register/bathroom"
+        nextHref="/room/register/geometry"
+      />
     </Container>
   );
 };
