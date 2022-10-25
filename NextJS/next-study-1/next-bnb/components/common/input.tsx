@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/require-default-props */
 import React from "react";
 import styled, { css } from "styled-components";
 import { useSelector } from "../../store";
@@ -10,6 +12,12 @@ type InputContainerProps = {
 }
 
 const Container = styled.div<InputContainerProps>`
+  label {
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
   input {
     position: relative;
     width: 100%;
@@ -65,17 +73,15 @@ const Container = styled.div<InputContainerProps>`
 `;
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // eslint-disable-next-line react/require-default-props, no-undef
   icon?: JSX.Element;
-  // eslint-disable-next-line react/require-default-props
   isValid?: boolean;
-  // eslint-disable-next-line react/require-default-props
   useValidation?: boolean;
-  // eslint-disable-next-line react/require-default-props
   errorMessage?: string;
+  label?: string;
 }
 
 const Input: React.FC<IProps> = ({
+  label,
   icon,
   isValid = false,
   useValidation = true,
@@ -85,7 +91,13 @@ const Input: React.FC<IProps> = ({
   const validateMode = useSelector((state) => state.common.validateMode);
     return (
       <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
-        <input {...props} />
+        {label && (
+          <label>
+            <span>{label}</span>
+            <input {...props} />
+          </label>
+        )}
+        {!label && <input {...props} />}
         {icon}
         {useValidation && validateMode && !isValid && errorMessage && (
           <p className="input-error-message">{errorMessage}</p>

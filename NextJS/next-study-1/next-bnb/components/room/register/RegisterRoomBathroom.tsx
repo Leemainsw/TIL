@@ -67,7 +67,7 @@ const RegisterRoomBathroom: React.FC = () => {
         isValid={bathroomCount > 0 && !!bathroomType}
       />
     </Container>
-  )
+  );
 };
 
 export default RegisterRoomBathroom;

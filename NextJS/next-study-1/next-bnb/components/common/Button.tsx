@@ -1,67 +1,117 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable max-len */
 /* eslint-disable react/require-default-props */
-import React from "react";
+import React, { Children } from "react";
 import styled, { css } from "styled-components";
 import palette from "../../styles/palette";
 
-const getButtonColor = (color: string) => {
+//* 버튼 색상 구하기
+const getButtonColor = (color: string, colorReverse: boolean) => {
+  if (colorReverse) {
+    switch (color) {
+      case "dark_cyan":
+        return css`
+          border: 2px solid ${palette.dark_cyan};
+          color: ${palette.dark_cyan};
+          background-color: white;
+        `;
+      default:
+        return css`
+          border: 2px solid ${palette.black};
+          color: ${palette.black};
+          background-color: white;
+        `;
+    }
+  }
   switch (color) {
     case "dark_cyan":
       return css`
         background-color: ${palette.dark_cyan};
+        color: white;
       `;
-    case "white":
+    case "bittersweet":
       return css`
-        background-color: white;
+        background-color: ${palette.bittersweet};
+        color: white;
       `;
     default:
       return css`
-        background-color: ${palette.bittersweet}
+        background-color: white;
+        color: ${palette.black};
+        border: 1px solid ${palette.gray_c4};
       `;
   }
 };
 
-const NormalButtonStyle = css`
+interface StyledButtonProps {
+  width: string | undefined;
+  colorReverse: boolean;
+}
+
+const Container = styled.button<StyledButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 48px;
   padding: 0 15px;
   border: 0;
   border-radius: 4px;
-  background-color: ${palette.bittersweet};
-  color: white;
-  font-size: 16px;
-  font-weight: 800;
-  outline: none;
-  cursor: pointer;
-`;
-
-const RegisterButtonStyle = css`
-  width: 161px;
-  height: 45px;
-  border: 1px solid ${palette.gray_c4};
-  backgorund-color: white;
-  border-radius: 4px;
-  color: ${palette.gray_48};
   font-size: 18px;
   font-weight: 700;
   outline: none;
   cursor: pointer;
+  width: ${(props) => props.width};
+  ${(props) => getButtonColor(props.color || "", props.colorReverse)};
+  svg {
+    margin-right: 12px;
+  }
 `;
 
-const Container = styled.button<{ styleType: "normal" | "register" }>`
-  ${({ styleType }) =>
-    styleType === "register" ? RegisterButtonStyle : NormalButtonStyle
-  }
-  ${(props) => getButtonColor(props.color || "")}
-`;
+// const NormalButtonStyle = css`
+//   width: 100%;
+//   height: 48px;
+//   padding: 0 15px;
+//   border: 0;
+//   border-radius: 4px;
+//   background-color: ${palette.bittersweet};
+//   color: white;
+//   font-size: 16px;
+//   font-weight: 800;
+//   outline: none;
+//   cursor: pointer;
+// `;
+
+// const RegisterButtonStyle = css`
+//   width: 161px;
+//   height: 45px;
+//   border: 1px solid ${palette.gray_c4};
+//   backgorund-color: white;
+//   border-radius: 4px;
+//   color: ${palette.gray_48};
+//   font-size: 18px;
+//   font-weight: 700;
+//   outline: none;
+//   cursor: pointer;
+// `;
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   color?: "dark_cyan" | "white";
-  styleType?: "normal" | "register";
+  width?: string;
+  colorReverse?: boolean;
+  // eslint-disable-next-line no-undef
+  icon?: JSX.Element;
+  styleType?: string;
 }
 
-const Button: React.FC<IProps> = ({ children, color, styleType = "normal", ...props }) => {
-  return <Container {...props} color={color} styleType={styleType}>{children}</Container>;
+const Button: React.FC<IProps> = ({ children, color, width, colorReverse = false, icon, ...props }) => {
+  return (
+    <Container {...props} color={color} width={width} colorReverse={colorReverse}>
+      {icon}
+      {children}
+    </Container>
+  );
 };
 
 export default React.memo(Button);
