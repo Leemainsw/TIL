@@ -26,6 +26,7 @@ type RegisterRoomState = {
   photos: string[];
   description: string;
   title: string;
+  price: number;
 };
 
 const initialState: RegisterRoomState = {
@@ -56,6 +57,7 @@ const initialState: RegisterRoomState = {
   ],
   description: "",
   title: "",
+  price: 0,
 };
 
 const registerRoom = createSlice({
@@ -205,6 +207,9 @@ const registerRoom = createSlice({
     },
     setTitle(state, action: PayloadAction<string>) {
       state.title = action.payload;
+    },
+    setPrice(state, action: PayloadAction<number>) {
+      state.price = action.payload;
     }
   },
 });
