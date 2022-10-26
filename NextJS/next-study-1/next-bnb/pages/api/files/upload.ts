@@ -30,12 +30,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             Body: stream,
           })
           .promise()
-          .then((res) => console.log(res))
-          .catch((e) => console.log(e));
-          console.log(files);
+          .then((res) => resolve(res.Location))
+          .catch((e) => reject(e));
         });
       });
-      console.log("url", url);
+      res.statusCode = 201;
+      res.send(url);
     } catch (e) {
       console.log(e);
       res.end();
