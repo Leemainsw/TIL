@@ -5,6 +5,7 @@ import { useSelector } from "../../../store";
 import palette from "../../../styles/palette";
 import Button from "../../common/Button";
 import UploadIcon from "../../../public/static/svg/register/upload.svg";
+import { uploadFileAPI } from "../../../lib/api/file";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -51,6 +52,16 @@ const RegisterRoomPhoto: React.FC = () => {
   const photos = useSelector((state) => state.registerRoom.photos);
   const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const formdata = new FormData();
+      formdata.append("file", file);
+      try {
+        await uploadFileAPI(formdata);
+      } catch (e) {
+        console.log(e);
+      }
+    }
     console.log(files);
   };
 
