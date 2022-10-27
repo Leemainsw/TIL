@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import ReactDatePicker from "react-datepicker";
+import { useSelector } from "../../../store";
+import { registerRoomActions } from "../../../store/registerRoom";
 import palette from "../../../styles/palette";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "../../common/DatePicker";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -20,11 +22,18 @@ const Container = styled.div`
 `;
 
 const RegisterRoomDate: React.FC = () => {
+  const startDate = useSelector((state) => state.registerRoom.startDate);
+  const dispatch = useDispatch();
+
+  const onChangeStartDate = (date: Date | null) => {
+    dispatch(registerRoomActions.setStartDate(date ? date.toString() : null));
+  };
+
   return (
     <Container>
       <h2>예약 가능 여부 설정하기</h2>
       <h3>11단계</h3>
-      <ReactDatePicker onChange={(date) => console.log(date)} />
+      <DatePicker selected={startDate ? new Date(startDate) : null} onChange={onChangeStartDate} />
     </Container>
   );
 };
