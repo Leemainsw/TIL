@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import ReactDatePicker from "react-datepicker";
 import palette from "../../../styles/palette";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -22,6 +24,7 @@ const RegisterRoomDate: React.FC = () => {
     <Container>
       <h2>예약 가능 여부 설정하기</h2>
       <h3>11단계</h3>
+      <ReactDatePicker onChange={(date) => console.log(date)} />
     </Container>
   );
 };
