@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { start } from "repl";
 import { BedType } from "../types/room";
 
 type RegisterRoomState = {
@@ -27,6 +28,8 @@ type RegisterRoomState = {
   description: string;
   title: string;
   price: number;
+  startDate: string | null;
+  endDate: string | null;
 };
 
 const initialState: RegisterRoomState = {
@@ -58,6 +61,8 @@ const initialState: RegisterRoomState = {
   description: "",
   title: "",
   price: 0,
+  startDate: null,
+  endDate: null,
 };
 
 const registerRoom = createSlice({
@@ -210,7 +215,13 @@ const registerRoom = createSlice({
     },
     setPrice(state, action: PayloadAction<number>) {
       state.price = action.payload;
-    }
+    },
+    setStartDate(state, action: PayloadAction<string | null>) {
+      state.startDate = action.payload;
+    },
+    setEndDate(state, action: PayloadAction<string | null>) {
+      state.endDate = action.payload;
+    },
   },
 });
 
