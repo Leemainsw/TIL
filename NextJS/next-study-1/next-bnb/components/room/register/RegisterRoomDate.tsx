@@ -5,6 +5,7 @@ import { useSelector } from "../../../store";
 import { registerRoomActions } from "../../../store/registerRoom";
 import palette from "../../../styles/palette";
 import DatePicker from "../../common/DatePicker";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
 padding: 62px 30px 100px;
@@ -54,6 +55,8 @@ h3 {
 const RegisterRoomDate: React.FC = () => {
   const startDate = useSelector((state) => state.registerRoom.startDate);
   const endDate = useSelector((state) => state.registerRoom.endDate);
+  const dateStartDate = startDate ? new Date(startDate) : null;
+  const dateEndDate = endDate ? new Date(endDate) : null;
 
   const dispatch = useDispatch();
 
@@ -74,6 +77,11 @@ const RegisterRoomDate: React.FC = () => {
           <label>
             <span>예약 시작일</span>
             <DatePicker
+              monthsShown={2}
+              selectsStart
+              startDate={dateStartDate}
+              endDate={dateEndDate}
+              minDate={new Date()}
               selected={startDate ? new Date(startDate) : null}
               onChange={onChangeStartDate}
             />
@@ -83,12 +91,21 @@ const RegisterRoomDate: React.FC = () => {
           <label>
             <span>예약 마감일</span>
             <DatePicker
+              monthsShown={2}
+              selectsStart
+              startDate={dateStartDate}
+              endDate={dateEndDate}
+              minDate={dateStartDate}
               selected={endDate ? new Date(endDate) : null}
               onChange={onChangeEndDate}
             />
           </label>
         </div>
       </div>
+      <RegisterRoomFooter
+        prevHref="/room/register/price"
+        nextHref="/room/register/checklist"
+      />
     </Container>
   );
 };
