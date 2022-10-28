@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import BackArrowIcon from "../../../public/static/svg/register/register_room_footer_back_arrow.svg";
 import palette from "../../../styles/palette";
 import Button from "../../common/Button";
+import { useSelector } from "../../../store";
+import { registerRoomAPI } from "../../../lib/api/room";
 
 const Container = styled.footer`
   position: fixed;
@@ -30,7 +33,21 @@ const Container = styled.footer`
 `;
 
 const RegisterRoomSubmitFooter: React.FC = () => {
-  const onClickregisterRoom = async () => {};
+  const userId = useSelector((state) => state.user.id);
+  const registerRoom = useSelector((state) => state.registerRoom);
+  const router = useRouter();
+  const onClickregisterRoom = async () => {
+    const registerRoomBody = {
+      ...registerRoom,
+      hostId: userId,
+    };
+    try {
+      await registerRoomAPI(registerRoomBody);
+      router.push("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Container>
       <Link href="room/register/date">
