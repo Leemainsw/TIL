@@ -74,7 +74,7 @@ const RegisterRoomBuilding: React.FC = () => {
   const largeBuildingType = useSelector((state) => state.registerRoom.largeBuildingType);
   const buildingType = useSelector((state) => state.registerRoom.buildingType);
   const roomType = useSelector((state) => state.registerRoom.roomType);
-  const isSetUpForGuest = useSelector((state) => state.registerRoom.isSetYpForGuest);
+  const isSetUpForGuest = useSelector((state) => state.registerRoom.isSetUpForGuest);
 
   const dispatch = useDispatch();
 
