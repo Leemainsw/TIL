@@ -6,7 +6,7 @@ type RegisterRoomState = {
   largeBuildingType: string | null;
   buildingType: string | null;
   roomType: string | null;
-  isSetYpForGuest: boolean | null;
+  isSetUpForGuest: boolean | null;
   maximumGuestCount: number;
   bedroomCount: number;
   bedCount: number;
@@ -36,7 +36,7 @@ const initialState: RegisterRoomState = {
   largeBuildingType: null,
   buildingType: null,
   roomType: null,
-  isSetYpForGuest: null,
+  isSetUpForGuest: null,
   maximumGuestCount: 1,
   bedroomCount: 0,
   bedCount: 1,
@@ -85,7 +85,7 @@ const registerRoom = createSlice({
       return state;
     },
     setIsSetUpForGuest(state, action: PayloadAction<boolean>) {
-      state.isSetYpForGuest = action.payload;
+      state.isSetUpForGuest = action.payload;
       return state;
     },
     setMaximumGuestCount(state, action: PayloadAction<number>) {
