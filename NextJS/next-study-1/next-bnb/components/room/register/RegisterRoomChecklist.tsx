@@ -5,6 +5,8 @@ import bathroom from "../../../pages/room/register/bathroom";
 import building from "../../../pages/room/register/building";
 import { useSelector } from "../../../store";
 import RegisterRoomCheckStep from "./RegisterRoomCheckStep";
+import RegisterRoomFooter from "./RegisterRoomFooter";
+import RegisterRoomSubmitFooter from "./RegisterRoomSubmitFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -271,6 +273,14 @@ const RegisterRoomChecklist: React.FC = () => {
           inProgress={stepInProgress === "date"}
         />
       </ul>
+      {isDateActived ? (
+        <RegisterRoomSubmitFooter />
+      ) : (
+        <RegisterRoomFooter
+          prevHref="/room/register/date"
+          nextHref={`/room/register/${stepInProgress}`}
+        />
+      )}
     </Container>
   );
 };
