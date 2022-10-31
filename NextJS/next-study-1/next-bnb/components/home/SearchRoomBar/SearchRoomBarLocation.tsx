@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { isEmpty } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -158,7 +160,12 @@ const SearchRoomBarLocation = () => {
         {popupOpened && (
           <ul className="search-room-bar-location-results">
             {!isEmpty(results) && results.map((result, index) => (
-              <li key={index} onClick={(e) => onClickResult(result.placeId)}>{result.description}</li>
+              <li
+                key={index}
+                onClick={() => onClickResult(result.placeId)}
+              >
+                {result.description}
+              </li>
             ))}
             {location && isEmpty(results) && <li>검색 결과가 없습니다.</li>}
             {!location && (
