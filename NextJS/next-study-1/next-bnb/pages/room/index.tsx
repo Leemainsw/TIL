@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import React from "react";
 import RoomMain from "../../components/room/main/RoomMain";
 import { getRoomListAPI } from "../../lib/api/room";
+import Data from "../../lib/data";
 import { wrapper } from "../../store";
 import { roomActions } from "../../store/room";
 
