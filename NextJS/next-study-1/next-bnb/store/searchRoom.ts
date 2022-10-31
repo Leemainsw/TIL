@@ -44,5 +44,5 @@ const searchRoom = createSlice({
   }
 });
 
-export const searchRoomActions = { ...searchRoom };
+export const searchRoomActions = { ...searchRoom.actions };
 export default searchRoom;
