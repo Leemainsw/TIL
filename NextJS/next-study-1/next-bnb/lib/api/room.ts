@@ -20,4 +20,4 @@ type GetRoomListAPIQueries = {
 
 export const getRoomListAPI = (queries: GetRoomListAPIQueries) => {
     return axios.get<RoomType[]>(makeQueryString("/api/rooms", queries));
-}
+};
