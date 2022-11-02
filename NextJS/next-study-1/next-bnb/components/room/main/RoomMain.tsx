@@ -11,6 +11,12 @@ const Container = styled.div<{ showMap: boolean }>`
   padding: 50px 80px;
   margin: auto;
 
+  ${({ showMap }) =>
+    showMap &&
+    css`
+      width: 840px;
+      margin: 0;
+    `};
   .room-list-info {
     margin-bottom: 8px;
   }
@@ -63,15 +69,6 @@ const Container = styled.div<{ showMap: boolean }>`
   .room-list-wrapper {
     display: flex;
   }
-
-  ${({ showMap }) => showMap && css`
-    width: 840px;
-    padding: 50px 24px;
-    margin: 0;
-  `}
-  .flex {
-    display: flex;
-  }
 `;
 
 const RoomMain: React.FC = () => {
@@ -82,7 +79,7 @@ const RoomMain: React.FC = () => {
   const [showMap, setShowMap] = useState(false);
 
   const getRoomListInfo = `${rooms.length}개의 숙소 
-    ${checkInDate ? `${checkInDate ? format(new Date(checkInDate), "MM월 dd일") : ""}` : ""};
+    ${checkInDate ? `${checkInDate ? format(new Date(checkInDate), "MM월 dd일") : ""}` : ""}
     ${checkInDate ? `${checkOutDate ? format(new Date(checkOutDate), "- MM월 dd일") : ""}` : ""}`;
 
     return (
