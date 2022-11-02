@@ -7,6 +7,7 @@ import RoomDetailPhotos from "./RoomDetailPhotos";
 import BedIcon from "../../../public/static/svg/room/detail/bed.svg";
 import { bedroomCountList } from "../../../lib/staticData";
 import RoomAmentityIcon from "./RoomAmentityIcon";
+import RoomDetailReservation from "./RoomDetailReservation";
 
 const Container = styled.div`
   width: 1120px;
