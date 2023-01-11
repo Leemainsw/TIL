@@ -106,4 +106,4 @@
 
 2. arguments 객체
 
-- `strict mode` 에서는 배개변수에 전달된 인수를 재할당하여 변경해도 `arguments` 객체에 반영되지 않는다.
+- `strict mode` 에서는 매개변수에 전달된 인수를 재할당하여 변경해도 `arguments` 객체에 반영되지 않는다.
